@@ -91,3 +91,6 @@ export default function App({ Component, pageProps }) {
 }
 ```
 커스텀 app.js를 사용해서 레이아웃도 만들 수 있음 
+
+---
+public 폴더는 상대경로로 찾지않고 바로 `"/파일명"` 슬래시를 사용함 
