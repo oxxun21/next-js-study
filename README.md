@@ -1,4 +1,7 @@
 # TIL
+page 폴더에 있는 파일명은 그대로 pathname이 됨 <br/>
+→ 파일명에 `-` 등 사용하지 말 것 (오류남) <br/>
+
 Link 안에 a 태그 넣을 때 legacyBehavior 를 Link에 넣어야 함 <br/>
 → a 태그를 안에 넣는 이유 : Link 안에는 href 외에 아무것도 안들어감<br/>
 
