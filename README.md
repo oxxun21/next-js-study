@@ -93,4 +93,22 @@ export default function App({ Component, pageProps }) {
 커스텀 app.js를 사용해서 레이아웃도 만들 수 있음 
 
 ---
-public 폴더는 상대경로로 찾지않고 바로 `"/파일명"` 슬래시를 사용함 
+public 폴더는 상대경로로 찾지않고 바로 `"/파일명"` 슬래시를 사용함 <br />
+
+getServerSideProps 함수를 사용해서 오직 server side에서만 작동하도록 할 수 있음 (함수명 변경 X)  <br/>
+✅ Next.js v13 <br/>
+```js
+export async function getStaticProps({ params }) {
+  return {
+    props: { params },
+  };
+}
+export async function getStaticPaths() {
+  return {
+    paths: [], // 동적 경로가 없으므로 빈 배열로 설정
+    fallback: "blocking", // 다른 경로로의 접근은 서버 사이드에서 대기
+  };
+}
+```
+13에선 getServerSideProps 과 더불어 getStaticProps 도 지양  <br/>
+→ fetch의 cache, revalidate 옵션을 사용하여 대체  <br/>
