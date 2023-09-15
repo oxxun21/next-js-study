@@ -1,9 +1,9 @@
 import React from "react";
 
-export default function List() {
+export default function AllEvents() {
   return (
     <div>
-      <h1>The List Page</h1>
+      <h1>All Events</h1>
     </div>
   );
 }
