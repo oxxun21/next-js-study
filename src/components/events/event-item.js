@@ -4,6 +4,7 @@ import Button from "../ui/button";
 import DateIcon from "../icons/date-icon";
 import AddressIcon from "../icons/address-icon";
 import ArrowRightIcon from "../icons/arrow-right-icon";
+import Image from "next/image";
 
 export default function EventItem(props) {
   const { title, image, date, location, id } = props;
@@ -17,7 +18,8 @@ export default function EventItem(props) {
 
   return (
     <li key={id} className={s.item}>
-      <img src={"/" + image} alt="이미지" />
+      {/* Image 사용시엔 넓이 높이 지정 필수 */}
+      <Image src={"/" + image} alt="이미지" width={250} height={160} />
       <div className={s.content}>
         <div className={s.summary}>
           <h2>{title}</h2>

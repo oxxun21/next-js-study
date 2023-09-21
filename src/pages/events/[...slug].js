@@ -1,23 +1,36 @@
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { getFilteredEvents } from "@/helpers/api-util";
 import EventList from "@/components/events/event-list";
 import ResultsTitle from "@/components/events/results-title";
 import Button from "@/components/ui/button";
 import ErrorAlert from "@/components/ui/error-alert";
-import useSWR from "swr";
+import Head from "next/head";
 
 export default function FilteredEvents(props) {
   const router = useRouter();
   const filterData = router.query.slug;
 
+  const pageHeadData = (
+    <Head>
+      <title>Filtered Events</title>
+      <meta name="desc" content={"필터링된 이벤트"} />
+    </Head>
+  );
+
   if (!filterData) {
-    return <p className="center">Loading...</p>;
+    return (
+      <>
+        {pageHeadData}
+        <p className="center">Loading...</p>;
+      </>
+    );
   }
 
   if (props.hasError) {
     return (
       <>
+        {pageHeadData}
         <ErrorAlert>
           <p>Invalid filter</p>
         </ErrorAlert>
@@ -33,6 +46,7 @@ export default function FilteredEvents(props) {
   if (!filteredEvents || filteredEvents.length === 0) {
     return (
       <>
+        {pageHeadData}
         <ErrorAlert>
           <p>No Events found</p>
         </ErrorAlert>
@@ -47,6 +61,7 @@ export default function FilteredEvents(props) {
 
   return (
     <>
+      {pageHeadData}
       <ResultsTitle date={date} />
       <EventList items={filteredEvents} />
     </>
