@@ -1,5 +1,7 @@
 import { MongoClient } from "mongodb";
 
-function connectToDB() {
-  MongoClient.connect("mongodb+srv://OhGaEun:sO35F7d7poh1DSOe@cluster0.kach5sy.mongodb.net/");
+export async function connectToDB() {
+  const client = await MongoClient.connect("mongodb+srv://OhGaEun:sO35F7d7poh1DSOe@cluster0.kach5sy.mongodb.net/");
+
+  return client;
 }
