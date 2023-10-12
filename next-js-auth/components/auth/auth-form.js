@@ -1,5 +1,7 @@
 import { useRef, useState } from "react";
 import classes from "./auth-form.module.css";
+import { signIn } from "next-auth/client";
+import { useRouter } from "next/router";
 
 async function createUser(email, password) {
   const res = await fetch("/api/auth/signup", {
@@ -21,6 +23,7 @@ function AuthForm() {
   const passwordRef = useRef();
 
   const [isLogin, setIsLogin] = useState(true);
+  const router = useRouter();
 
   function switchAuthModeHandler() {
     setIsLogin((prevState) => !prevState);
@@ -37,6 +40,16 @@ function AuthForm() {
     // 유효성 체크 추가 가능
 
     if (isLogin) {
+      const result = await signIn("credentials", {
+        redirect: false,
+        email: enteredEmail,
+        password: enteredPassword,
+      });
+
+      if (!result.error) {
+        //
+        router.replace("/profile");
+      }
     } else {
       try {
         const result = await createUser(enteredEmail, enteredPassword);
